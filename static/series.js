@@ -1,4 +1,4 @@
-const default_search_query = "query ($Page: Int) {Page(page: $Page perPage: 10) {media(status: RELEASING type: ANIME sort: SCORE_DESC) {id title {userPreferred}coverImage {large}nextAiringEpisode {timeUntilAiring episode}}}}";
+let default_search_query = "query ($Page: Int) {Page(page: $Page perPage: 10) {media(status: RELEASING type: ANIME sort: SCORE_DESC) {id title {userPreferred}coverImage {large}nextAiringEpisode {timeUntilAiring episode}}}}";
 let query_options = {
     method: 'POST',
     headers: {
@@ -16,7 +16,7 @@ let series_query_results;
 let series_template;
 let series = document.getElementById("series");
 function query_series(query, page) {
-    fetch("https://graphql.anilist.co/", query_options).then(async (data) => {
+    fetch("https://graphql.anilist.co", query_options).then(async (data) => {
         series_query_results = await data.json();
         series_query_results.data.Page.media.forEach((e) => {
             series_template = document.getElementById("series_template").content;

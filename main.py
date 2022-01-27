@@ -24,7 +24,7 @@ db = mysql.connector.connect(autocommit=True, host=DBHOST, user=DBUSER, password
 cur = db.cursor()
 
 jenv = Environment(loader=PackageLoader("main"), autoescape=select_autoescape(['html']))
-main_template = jenv.get_template("main.html")
+main_template = jenv.get_template("old_main.html")
 
 
 

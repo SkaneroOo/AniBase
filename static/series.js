@@ -14,7 +14,7 @@ let query_options = {
 }
 let series_query_results;
 let series_template;
-let series = document.getElementById("series");
+let series = document.getElementById("items");
 function query_series(query, page) {
     fetch("https://graphql.anilist.co", query_options).then(async (data) => {
         series_query_results = await data.json();

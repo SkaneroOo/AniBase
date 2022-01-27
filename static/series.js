@@ -17,6 +17,28 @@ let series_template = document.getElementById("series_template");
 let series = document.getElementById("items");
 let new_series;
 let item;
+
+function timer(t) {
+    setInterval( () => {
+        let str, d, h, m, s;
+        if (t > 0) {
+            str = "";
+            d = parseInt(t/(24*60*60));
+            h = parseInt(t/(60*60)) % 24;
+            m = parseInt(t/60) % 60;
+            s = t % 60;
+            str += d ? `${d} days ` : "";
+            str += h ? `${h} hours ` : "";
+            str += m ? `${m} minutes ` : "";
+            str += `${s} seconds`;
+            t--;
+        } else {
+            str = "Currently airing"
+        }
+        this.innerText = str;
+    }, 1000);
+}
+
 function query_series(query, page) {
     fetch("https://graphql.anilist.co", query_options).then(async (data) => {
         series_query_results = await data.json();
@@ -33,7 +55,7 @@ function query_series(query, page) {
                 item.innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
                 new_series.appendChild(item);
                 item = document.createElement("h3");
-                item.innerText = e.nextAiringEpisode.timeUntilAiring;
+                item.onload = timer(e.nextAiringEpisode.timeUntilAiring);
                 new_series.appendChild(item);
             }
             item = document.createElement("br");

@@ -18,7 +18,8 @@ let series = document.getElementById("items");
 let new_series;
 let item;
 
-function timer(t) {
+function timer(e) {
+    let t = parseInt(e.innerText);
     setInterval( () => {
         let str, d, h, m, s;
         if (t > 0) {
@@ -55,7 +56,8 @@ function query_series(query, page) {
                 item.innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
                 new_series.appendChild(item);
                 item = document.createElement("h3");
-                item.onload = timer(e.nextAiringEpisode.timeUntilAiring);
+                item.innerText = e.nextAiringEpisode.timeUntilAiring;
+                item.onload = timer;
                 new_series.appendChild(item);
             }
             item = document.createElement("br");

@@ -14,8 +14,15 @@ function getCookie(cname) {
     return "";
 }
 
-if (getCookie("access_token")) {
-    console.log("Logged in");
+let token = getCookie("access_token");
+let login = document.getElementById("login");
+
+if (token) {
+    let loggedIn = document.createElement("h2");
+    loggedIn.innerText = "Logged in";
+    login.appendChild(loggedIn);
 } else {
-    console.log(document.cookie);
+    let notLoggedIn = document.createElement("div");
+    notLoggedIn.innerHTML = "<a href='https://anilist.co/api/v2/oauth/authorize?client_id=7387&response_type=code'>Login with AniList</a>";
+    login.appendChild(notLoggedIn);
 }

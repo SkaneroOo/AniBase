@@ -1,22 +1,10 @@
-const default_search_query = `query ($Page: Int) {
-    Page(page: $Page perPage: 10) {
-        media(status: RELEASING type: ANIME sort: SCORE_DESC) {
-            id
-            title {
-                userPreferred
-            }
-            coverImage {
-                large
-            }
-            nextAiringEpisode {
-                timeUntilAiring
-                episode
-            }
-        }
-    }
-}`
+const default_search_query = "query ($Page: Int) {Page(page: $Page perPage: 10) {media(status: RELEASING type: ANIME sort: SCORE_DESC) {id title {userPreferred}coverImage {large}nextAiringEpisode {timeUntilAiring episode}}}}";
 let query_options = {
     method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
     body: JSON.stringify({
         query: default_search_query,
         variables: {

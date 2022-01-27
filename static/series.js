@@ -40,3 +40,5 @@ function query_series(query, page) {
         })
     })
 }
+
+query_series(default_search_query, 1);

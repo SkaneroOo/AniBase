@@ -32,7 +32,7 @@ function query_series(query, page) {
             item.innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
             new_series.appendChild(item);
             item = document.createElement("h3");
-            h3.innerText = e.nextAiringEpisode.timeUntilAiring;
+            item.innerText = e.nextAiringEpisode.timeUntilAiring;
             new_series.appendChild(item);
             item = document.createElement("br");
             new_series.appendChild(item);

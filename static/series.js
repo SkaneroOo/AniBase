@@ -22,8 +22,8 @@ function query_series(query, page) {
             series_template = document.getElementById("series_template").content;
             series_template.children[0].src = e.coverImage.large;
             series_template.children[1].innerText = e.title.userPrefered;
-            series_template.children[2].innerText = `Episode ${e.nextAiringepisode.episode} in:`;
-            series_template.children[3].innerText = e.nextAiringepisode.timeUntilAiring;
+            series_template.children[2].innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
+            series_template.children[3].innerText = e.nextAiringEpisode.timeUntilAiring;
             series.appendChild(series_template);
         })
     })

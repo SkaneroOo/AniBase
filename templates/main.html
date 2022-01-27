@@ -5,60 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniBase</title>
-    <script>
-        var time, h, m, s;
-        window.onload = timeNow;
-
-        function timeNow() {
-            let timers = Array.from(document.getElementsByClassName("timer"));
-            let times = [];
-            let i = 0;
-            let d, h, m, s, str;
-            timers.forEach(timer => {
-                times.push(parseInt(timer.innerHTML));
-            });
-            times.forEach( t => {
-                    if (t > 0) {
-                        str = "";
-                        d = parseInt(t/(24*60*60));
-                        h = parseInt(t/(60*60)) % 24;
-                        m = parseInt(t/60) % 60;
-                        s = t % 60;
-                        str += d ? `${d} days ` : "";
-                        str += h ? `${h} hours ` : "";
-                        str += m ? `${m} minutes ` : "";
-                        str += `${s} seconds`;
-                        times[i]--;
-                    } else {
-                        str = "Currently airing"
-                    }
-                    timers[i].textContent = str;
-                    i++;
-                })
-            setInterval( () => {
-                i = 0;
-                times.forEach( t => {
-                    if (t > 0) {
-                        str = "";
-                        d = parseInt(t/(24*60*60));
-                        h = parseInt(t/(60*60)) % 24;
-                        m = parseInt(t/60) % 60;
-                        s = t % 60;
-                        str += d ? `${d} days ` : "";
-                        str += h ? `${h} hours ` : "";
-                        str += m ? `${m} minutes ` : "";
-                        str += `${s} seconds`;
-                        times[i]--;
-                    } else {
-                        str = "Currently airing"
-                    }
-                    timers[i].textContent = str;
-                    i++;
-                })
-            }, 1000);
-
-        }
-    </script>
+    <script type="text/javascript" src="./static/timers.js"></script>
     <script type="text/javascript" src="./static/main.js"></script>
 </head>
 <body>
@@ -77,37 +24,7 @@
         </div>
     {% endfor %}
 </body>
-<script>
-    let search_url = "http://127.0.0.1:8899/api/search";
-    let text;
-    let search_bar = document.getElementById("search_bar");
-    search_bar.value = "";
-    let results = document.getElementById("results");
-    let query_results;
-    let result;
-    search_bar.onblur = () => {
-        results.innerHTML = "";
-        text = "";
-    }
-    setInterval(() => {
-        if (search_bar.value && search_bar.value != text) {
-            text = search_bar.value;
-            fetch(`${search_url}?title=${text}`).then(async (data) => {
-                query_results = await data.json();
-                results.innerHTML = "";
-                query_results.forEach( res => {
-                    result = document.createElement("div");
-                    result.setAttribute("class", "result");
-                    result.appendChild(document.createElement("img"))
-                    result.appendChild(document.createElement("h6"))
-                    result.firstChild.src = res.coverImage.medium;
-                    result.lastChild.innerHTML = res.title.romaji;
-                    results.appendChild(result);
-                })
-            })
-        }
-    }, 2500)
-</script>
+<script type="text/javascript" src="./static/search.js"></script>
 <style>
 * {
     padding: 0;

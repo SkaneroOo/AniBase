@@ -68,7 +68,7 @@ class API:
                 auth["access_token"], 
                 max_age=auth["expires_in"], 
                 path="/",
-                http_only=True, 
+                http_only=False, 
                 secure=False
             )
             raise falcon.HTTPFound("http://143.47.184.161/")

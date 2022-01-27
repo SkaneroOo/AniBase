@@ -1,0 +1,4 @@
+bjoern
+falcon
+mysql-connector-python
+python-dotenv

@@ -16,15 +16,24 @@ let series_query_results;
 let series_template = document.getElementById("series_template");
 let series = document.getElementById("items");
 let new_series;
+let item;
 function query_series(query, page) {
     fetch("https://graphql.anilist.co", query_options).then(async (data) => {
         series_query_results = await data.json();
         series_query_results.data.Page.media.forEach((e) => {
-            new_series = series_template.content;
-            new_series.children[0].src = e.coverImage.large;
-            new_series.children[1].innerText = e.title.userPreferred;
-            new_series.children[2].innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
-            new_series.children[3].innerText = e.nextAiringEpisode.timeUntilAiring;
+            new_series = document.createElement("div");
+            item = document.createElement("img");
+            item.href = e.coverImage.large;
+            new_series.appendChild(item);
+            item = document.createElement("h1");
+            item.innerText = e.title.userPreferred;
+            new_series.appendChild(item);
+            item = document.createElement("h3");
+            item.innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
+            new_series.appendChild(item);
+            item = document.createElement("h3");
+            h3.innerText = e.nextAiringEpisode.timeUntilAiring;
+            new_series.appendChild(item);
             series.appendChild(new_series);
         })
     })

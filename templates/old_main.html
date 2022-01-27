@@ -13,18 +13,17 @@
     <input type="text" id="search_bar" value="">
     <div id="results"></div>
     <br>
-    <div id="items">
-        <template id="series_template">
-            <img src="">
-            <h1></h1>
-            <h3></h3>
-            <h4></h4>
+    {% for item in series %}
+        <div>
+            <img src="{{ item.coverImage.large }}">
+            <h1>{{ item.title.romaji }}</h1>
+            <h3>Episode {{ item.nextAiringEpisode.episode }} in:</h3>
+            <h4 class="timer">{{ item.nextAiringEpisode.timeUntilAiring }}</h4>
             <br><br>
-        </template>
-        
-    </div>
+        </div>
+    {% endfor %}
 </body>
-<script type="text/javascript" src="./static/series.js"></script>
+<script type="text/javascript" src="./static/timers.js"></script>
 <script type="text/javascript" src="./static/main.js"></script>
 <script type="text/javascript" src="./static/search.js"></script>
 <style>

@@ -17,12 +17,12 @@ const default_search_query = `query ($Page: Int) {
 }`
 let query_options = {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
         query: default_search_query,
         variables: {
             page: 1
         }
-    }
+    })
 }
 let series_query_results;
 let series_template;

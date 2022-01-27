@@ -10,7 +10,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from falcon.response import Response
 from falcon.request import Request
 from dotenv import load_dotenv
-from os import environ
+from os import environ, path
 import mysql.connector
 
 
@@ -37,6 +37,7 @@ class Main:
         resp.text = main_template.render(series=get_series([series_id]))
 
     def on_get(self, req: Request, resp: Response):
+        #print(req.get_cookie_values("access_token"))
         resp.content_type = falcon.MEDIA_HTML
         cur.execute("""select (anime_id) from watching where user_id = 1""")
         series_ids = [e[0] for e in cur.fetchall()]
@@ -83,11 +84,17 @@ class API:
             return
         resp.text = json.dumps(search_series(title=data))
 
+    def on_get_static(self, req: Request, resp: Response, filename: str):
+        with open(f"./static/{filename}", "r") as f:
+            resp.text = f.read()
+            resp.content_type = falcon.MEDIA_JS
+
 app.add_route("/", Main())
 app.add_route("/series/{series_id:int}", Main(), suffix="series")
 app.add_route("/api", API())
 app.add_route("/api/search", API(), suffix="search")
 app.add_route("/api/login/auth", API(), suffix="auth")
+app.add_route("/static/{filename}", API(), suffix="static")
 
 try:
     run(app, host="127.0.0.1", port=8899)

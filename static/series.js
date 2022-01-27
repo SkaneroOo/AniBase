@@ -23,17 +23,19 @@ function query_series(query, page) {
         series_query_results.data.Page.media.forEach((e) => {
             new_series = document.createElement("div");
             item = document.createElement("img");
-            item.href = e.coverImage.large;
+            item.src = e.coverImage.large;
             new_series.appendChild(item);
             item = document.createElement("h1");
             item.innerText = e.title.userPreferred;
             new_series.appendChild(item);
-            item = document.createElement("h3");
-            item.innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
-            new_series.appendChild(item);
-            item = document.createElement("h3");
-            item.innerText = e.nextAiringEpisode.timeUntilAiring;
-            new_series.appendChild(item);
+            if (e.nextAiringEpisode) {
+                item = document.createElement("h3");
+                item.innerText = `Episode ${e.nextAiringEpisode.episode} in:`;
+                new_series.appendChild(item);
+                item = document.createElement("h3");
+                item.innerText = e.nextAiringEpisode.timeUntilAiring;
+                new_series.appendChild(item);
+            }
             item = document.createElement("br");
             new_series.appendChild(item);
             new_series.appendChild(item);

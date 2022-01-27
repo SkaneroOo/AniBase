@@ -34,6 +34,9 @@ function query_series(query, page) {
             item = document.createElement("h3");
             h3.innerText = e.nextAiringEpisode.timeUntilAiring;
             new_series.appendChild(item);
+            item = document.createElement("br");
+            new_series.appendChild(item);
+            new_series.appendChild(item);
             series.appendChild(new_series);
         })
     })

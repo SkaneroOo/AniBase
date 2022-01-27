@@ -19,6 +19,7 @@ let new_series;
 let item;
 
 function timer(e) {
+    console.log(e);
     let t = parseInt(e.innerText);
     setInterval( () => {
         let str, d, h, m, s;

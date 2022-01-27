@@ -50,7 +50,6 @@ class API:
     def on_get(self, req: Request, resp: Response): # endpoint just for testing
         try:
             data = req.get_param("code")
-            print(data)
         except:
             resp.status = falcon.HTTP_400
             return
@@ -59,9 +58,9 @@ class API:
     def on_get_auth(self, req: Request, resp: Response):
         code = req.get_param("code")
         auth = auth_user(code)
-        for k, v in auth.items():
-            if k != "access_token":
-                print(f"{k}\n{v}")
+        # for k, v in auth.items():
+        #     if k != "access_token":
+        #         print(f"{k}\n{v}")
         if auth:
             resp.set_cookie(
                 "access_token", 
@@ -78,7 +77,7 @@ class API:
         try:
             #data = json.loads(req.get_media())
             data = req.get_param("title")
-            print(data)
+            #print(data)
         except:
             resp.status = falcon.HTTP_400
             return
